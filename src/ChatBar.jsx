@@ -2,6 +2,7 @@ import React, {Component} from ‘react’;
 
 class ChatBar extends Component {
  render() {
+ console.log("Rendering <App/>");
    return (
        <div>
          <footer className=“chatbar”>
