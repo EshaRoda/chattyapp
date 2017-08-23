@@ -1,18 +1,14 @@
 import React, {Component} from ‘react’;
-import MessageList from ‘./MessageList.jsx’
-//import ChatBar from ‘./ChatBar.jsx’
-//import NavBar from ‘./NavBar.jsx’
+import Message from ‘./Message.jsx’
 
-class App extends Component {
+class MessageList extends Component {
  render() {
    return (
-       <div>
-           <NavBar/>
-           <MessageList/>
-           <ChatBar/>
-       </div>
+       <main className="messages">
+        { messages }
+      </main>
 
  );
  }
 }
-export default App;
+export default MessageList;
