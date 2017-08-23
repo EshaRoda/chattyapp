@@ -9,7 +9,6 @@ class App extends Component {
 constructor() {
   super();
   this.state = {
-    // username: 'User ' + Math.ceil(Math.random() * 99),
     currentUser: {name: "Esha"},
     messages: [
     {
@@ -25,6 +24,19 @@ constructor() {
   ]
   };
   //this.onNewPost = this.onNewPost.bind(this);
+}
+
+componentDidMount() {
+  this.socket = new WebSocket('ws://localhost:3000');
+  this.socket.addEventListener('open', () => {
+      this.socket.send('it works');
+  });
+  setTimeout(() => {
+    console.log("Simulating incoming message");
+    const newMessage = {id: 3, username: "Michelle", content: "Hello there!"};
+    const messages = this.state.messages.concat(newMessage)
+    this.setState({messages: messages})
+  }, 3000);
 }
 
 render() {
