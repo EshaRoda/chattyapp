@@ -1,16 +1,18 @@
-import React, {Component} from ‘react’;
+import React, {Component} from 'react';
 
 class ChatBar extends Component {
  render() {
- console.log("Rendering <App/>");
+ //console.log("Rendering <App/>");
    return (
        <div>
-         <footer className=“chatbar”>
-           <input className=“chatbar-username” placeholder=“Your Name (Optional)” />
-           <input className=“chatbar-message” placeholder=“Type a message and hit ENTER” />
-         </footer>
+         <footer className="chatbar">
+        <input className="chatbar-username" placeholder="Your Name (Optional)" />
+        <input className="chatbar-message" placeholder="Type a message and hit ENTER" />
+      </footer>
      </div>
    )
  }
 }
 export default ChatBar;
+
+

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Navbar from './Navbar.jsx';
+import NavBar from './NavBar.jsx';
 import MessageList from './MessageList.jsx';
 import Chatbar from './Chatbar.jsx';
 
@@ -8,7 +8,10 @@ class App extends Component {
 
 constructor(props) {
     super(props);
-    this.state = {loading: false};
+    this.state = {
+    currentUser: {name: "Esha"},
+    messages: []
+    };
 }
 
 componentDidMount() {
@@ -18,8 +21,15 @@ componentDidMount() {
 }
 
 render() {
+
+    //if(this.state.loading) {
+    //  return <h1>Loading...</h1>
+    //} else {
+    //  return <h1>3 seconds have elapsed and page is loaded</h1>
+    //}
+
      <div>
-        <Navbar />
+        <NavBar />
         <MessageList />
         <Chatbar />
       </div>
