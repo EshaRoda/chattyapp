@@ -10,13 +10,15 @@ constructor() {
   super();
   this.state = {
     // username: 'User ' + Math.ceil(Math.random() * 99),
-    currentUser: {name: "Bob"},
+    currentUser: {name: "Esha"},
     messages: [
     {
+      id: 1,
       username: "Bob",
       content: "Has anyone seen my marbles?",
     },
     {
+      id: 2,
       username: "Anonymous",
       content: "No, I think you lost them. You lost your marbles Bob. You lost them for good."
     }
@@ -24,19 +26,6 @@ constructor() {
   };
   //this.onNewPost = this.onNewPost.bind(this);
 }
-
-componentDidMount() {
-  this.socket = new WebSocket("ws:localhost:3001");
-  socket.addEventListener('open', () => {
-      // this.socket.send('it works');
-  });
-  // this.socket.addEventListener('message', (event) => {
-  //   console.log("Connected to server");
-  // });
-}
-    // setTimeout(() => {
-    //   this.setState({loading: true})
-    // }, 3000)
 
 render() {
     return (
