@@ -6,35 +6,47 @@ import Chatbar from './Chatbar.jsx';
 
 class App extends Component {
 
-constructor(props) {
-    super(props);
-    this.state = {
-    currentUser: {name: "Esha"},
-    messages: []
-    };
+constructor() {
+  super();
+  this.state = {
+    // username: 'User ' + Math.ceil(Math.random() * 99),
+    currentUser: {name: "Bob"},
+    messages: [
+    {
+      username: "Bob",
+      content: "Has anyone seen my marbles?",
+    },
+    {
+      username: "Anonymous",
+      content: "No, I think you lost them. You lost your marbles Bob. You lost them for good."
+    }
+  ]
+  };
+  //this.onNewPost = this.onNewPost.bind(this);
 }
 
 componentDidMount() {
-    setTimeout(() => {
-      this.setState({loading: true})
-    }, 3000)
+  this.socket = new WebSocket("ws:localhost:3001");
+  socket.addEventListener('open', () => {
+      // this.socket.send('it works');
+  });
+  // this.socket.addEventListener('message', (event) => {
+  //   console.log("Connected to server");
+  // });
 }
+    // setTimeout(() => {
+    //   this.setState({loading: true})
+    // }, 3000)
 
 render() {
-
-    //if(this.state.loading) {
-    //  return <h1>Loading...</h1>
-    //} else {
-    //  return <h1>3 seconds have elapsed and page is loaded</h1>
-    //}
-
-     <div>
-        <NavBar />
-        <MessageList />
-        <Chatbar />
-      </div>
+    return (
+      <div>
+      <NavBar />
+      <MessageList messages={this.state.messages} />
+      <Chatbar username={this.state.currentUser} />
+    </div>
+    );
   }
 }
-
 
 export default App;
