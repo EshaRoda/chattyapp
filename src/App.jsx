@@ -6,22 +6,11 @@ import Chatbar from './Chatbar.jsx';
 
 class App extends Component {
 
-constructor() {
-  super();
+constructor(props) {
+  super(props);
   this.state = {
     currentUser: {name: "Esha"},
-    messages: [
-    {
-      id: 1,
-      username: "Bob",
-      content: "Has anyone seen my marbles?",
-    },
-    {
-      id: 2,
-      username: "Anonymous",
-      content: "No, I think you lost them. You lost your marbles Bob. You lost them for good."
-    }
-  ]
+    messages: []
   };
   //this.onNewPost = this.onNewPost.bind(this);
 }
@@ -31,12 +20,11 @@ componentDidMount() {
   this.socket.addEventListener('open', () => {
       this.socket.send('it works');
   });
-  setTimeout(() => {
-    console.log("Simulating incoming message");
-    const newMessage = {id: 3, username: "Michelle", content: "Hello there!"};
+  this.socket.addEventListener('message', (event) => {
+    const newMessage = JSON.parse(event.data);
     const messages = this.state.messages.concat(newMessage)
-    this.setState({messages: messages})
-  }, 3000);
+    this.setState({messages: messages});
+  });
 }
 
 render() {
