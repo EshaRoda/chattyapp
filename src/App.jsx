@@ -12,11 +12,10 @@ constructor(props) {
     currentUser: {name: "Esha"},
     messages: []
   };
-  //this.onNewPost = this.onNewPost.bind(this);
 }
 
 componentDidMount() {
-  this.socket = new WebSocket('ws://localhost:3000');
+  this.socket = new WebSocket('ws://localhost:3001');
   this.socket.addEventListener('open', () => {
       this.socket.send('it works');
   });
