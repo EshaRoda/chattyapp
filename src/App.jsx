@@ -6,12 +6,13 @@ import Chatbar from './Chatbar.jsx';
 
 class App extends Component {
 
-constructor(props) {
-  super(props);
+constructor() {
+  super();
   this.state = {
     currentUser: {name: "Esha"},
     messages: []
   };
+   this.onNewPost = this.onNewPost.bind(this);
 }
 
 componentDidMount() {
@@ -24,6 +25,17 @@ componentDidMount() {
     const messages = this.state.messages.concat(newMessage)
     this.setState({messages: messages});
   });
+}
+
+updateCurrentUser(user) {
+  if (this.state.currentUser !== user) {
+    this.socket.send(JSON.stringify({type: 'update', oldUser: this.state.currentUser, newUser: user}));
+    this.setState({currentUser: user});
+  }
+}
+
+onNewPost(post) {
+  this.socket.send(JSON.stringify({type: 'content', content: post, user: this.state.currentUser, color: this.state.color}));
 }
 
 render() {
