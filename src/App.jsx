@@ -12,8 +12,8 @@ constructor() {
     currentUser: "Esha",
     messages: []
   };
-  // this.onNewPost = this.onNewPost.bind(this);
-  //this.updateCurrentUser = this.updateCurrentUser.bind(this);
+  /*this.onNewPost = this.onNewPost.bind(this);*/
+  /*this.updateCurrentUser = this.updateCurrentUser.bind(this);*/
 }
 
 componentDidMount() {
@@ -21,14 +21,26 @@ componentDidMount() {
   this.socket.addEventListener('message', (event) => {
     const newMessage = JSON.parse(event.data);
     console.log(newMessage);
-    const messages = this.state.messages.concat(newMessage)
-    this.setState({messages: messages});
+
+    switch (newMessage.type) {
+    case 'count':
+      this.setState({userCount: newMessage.userCount});
+      /*console.log("User Count = ", userCount);*/
+      break;
+    default:
+      const messages = this.state.messages.concat(newMessage)
+      this.setState({messages: messages});
+      break;
+    }
   });
 }
 
 updateCurrentUser = (user) => {
   if (this.state.currentUser !== user) {
-    this.socket.send(JSON.stringify({type: 'update', oldUser: this.state.currentUser, newUser: user}));
+    this.socket.send(JSON.stringify({
+      type: 'update',
+      oldUser: this.state.currentUser,
+      newUser: user}));
     this.setState({currentUser: user});
   }
 }
@@ -39,14 +51,12 @@ onNewPost = (text) => {
     username: this.state.currentUser || 'Anonymous',
     content: text
   }))
-
-
 }
 
 render() {
     return (
       <div>
-      <NavBar />
+      <NavBar userCount={ this.state.userCount } />
       <MessageList messages={this.state.messages} />
       <Chatbar
       username={this.state.currentUser}
