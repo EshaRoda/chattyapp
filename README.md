@@ -1,7 +1,14 @@
-React Boilerplate
+Chatty App
 =====================
 
-A minimal and light dev environment for ReactJS.
+A single page, chatroom web app developed for week 5 project
+
+
+## Usage
+- Install dependencies at project root and in /chatty_server
+- Run npm start in both directories to start app server and socket server
+- Visit localhost:3000 to use app
+
 
 ## Screenshots
 
