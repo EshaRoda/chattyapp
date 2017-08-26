@@ -20,6 +20,7 @@ componentDidMount() {
   this.socket = new WebSocket('ws://localhost:3001');
   this.socket.addEventListener('message', (event) => {
     const newMessage = JSON.parse(event.data);
+    console.log(newMessage);
     const messages = this.state.messages.concat(newMessage)
     this.setState({messages: messages});
   });
@@ -35,9 +36,11 @@ updateCurrentUser = (user) => {
 onNewPost = (text) => {
   this.socket.send(JSON.stringify({
     type:'message',
-    username: this.state.currentUser,
+    username: this.state.currentUser || 'Anonymous',
     content: text
   }))
+
+
 }
 
 render() {
