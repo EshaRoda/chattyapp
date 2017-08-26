@@ -30,7 +30,9 @@ class ChatBar extends Component {
         defaultValue={this.props.username}
         onKeyDown={this.handleUserName}
         onBlur={this.updateUserName} />
-        <input className="chatbar-message" placeholder={this.props.messages} onKeyDown={this.handleInput} />
+        <input className="chatbar-message"
+        placeholder={this.props.messages}
+        onKeyDown={this.handleInput} />
       </footer>
      </div>
    )
